@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Gun : MonoBehaviour 
 {
     public float damage = 10f;
     public float range = 100f;
@@ -12,29 +12,35 @@ public class Gun : MonoBehaviour
     public Camera fpscamera;
     public ParticleSystem muzzleflash;
     public GameObject impactEffect;
+    Quaternion poscamera;
 
     private float nextTimeToFire = 0f;
+    public Recoil Recoil_Script;
 
+    public void Start()
+    {
+    }
     // Update is called once per frame
     void Update()
     {
-
+        
         if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();
+            
         }
 
     }
 
-    void Shoot()
+    public void Shoot()
     {
+        Recoil_Script.RecoilFire();
         muzzleflash.Play();
 
         RaycastHit hit;
         if (Physics.Raycast(fpscamera.transform.position, fpscamera.transform.forward, out hit, range))
         {
-            UnityEngine.Debug.Log(hit.transform.name);
 
             Target target = hit.transform.GetComponent<Target>();
             if (target != null)
@@ -50,7 +56,5 @@ public class Gun : MonoBehaviour
             GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impactGO, 2f);
         }
-
-
     }
 }
