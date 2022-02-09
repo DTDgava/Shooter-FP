@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 
 public class Gun : MonoBehaviour 
 {
@@ -14,6 +14,7 @@ public class Gun : MonoBehaviour
     private int currentAmmo;
     public float reloadTime = 1f;
     private bool isReloading = false;
+    float allammo = 200;
 
     public Camera fpscamera;
     public ParticleSystem muzzleflash;
@@ -22,11 +23,13 @@ public class Gun : MonoBehaviour
 
     private float nextTimeToFire = 0f;
     public Recoil Recoil_Script;
+    public Text ammoText;
 
     public void Start()
     {
         
         currentAmmo = maxAmmo;
+        ammoText.text = currentAmmo + " | " + allammo;
     }
     // Update is called once per frame
     void Update()
@@ -36,6 +39,7 @@ public class Gun : MonoBehaviour
 
         if(currentAmmo <= 0)
         {
+            allammo -= maxAmmo;
             StartCoroutine(Reload());
             return;
         }
@@ -51,12 +55,11 @@ public class Gun : MonoBehaviour
     IEnumerator Reload ()
     {
         isReloading = true;
-        Debug.Log("Reloading...");
-
+        ammoText.text = "R" + " | " + allammo;
         yield return new WaitForSeconds(reloadTime);
-
         currentAmmo = maxAmmo;
-        isReloading = false; 
+        isReloading = false;
+        ammoText.text = currentAmmo + " | " + allammo;
     }
 
     public void Shoot()
@@ -70,7 +73,7 @@ public class Gun : MonoBehaviour
         if (Physics.Raycast(fpscamera.transform.position, fpscamera.transform.forward, out hit, range))
         {
 
-            Target target = hit.transform.GetComponent<Target>();
+            TBA_ENEMY target = hit.transform.GetComponent<TBA_ENEMY>();
             if (target != null)
             {
                 target.TakeDamage(damage);
@@ -84,5 +87,6 @@ public class Gun : MonoBehaviour
             GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impactGO, 2f);
         }
+        ammoText.text = currentAmmo + " | " + allammo;
     }
 }
