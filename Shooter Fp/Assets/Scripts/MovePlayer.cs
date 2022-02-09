@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MovePlayer : MonoBehaviour
 {
     public CharacterController controller;
-
+    public Image Health;
+    float PlayerHeatlh = 100;
     public float speed = 12f;
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
