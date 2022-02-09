@@ -249,7 +249,74 @@ Transform:
   m_LocalScale: {x: 30, y: 1, z: 30}
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 3
+=======
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &70735664 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1206790267675218954, guid: ed884912bb2d8f34bb20bbf879b4e87d, type: 3}
+  m_PrefabInstance: {fileID: 679043265}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &70735665 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2014430605032181424, guid: ed884912bb2d8f34bb20bbf879b4e87d, type: 3}
+  m_PrefabInstance: {fileID: 679043265}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &70735666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70735664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6525646918f3824580ade559928b772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 50
+  range: 1000
+  fireRate: 15
+  impactForce: 30
+  maxAmmo: 3
+  reloadTime: 2
+  fpscamera: {fileID: 1962132669}
+  muzzleflash: {fileID: 1396619448}
+  impactEffect: {fileID: 100002, guid: 00fedc70b62a31e448e8ccc298257b56, type: 3}
+  Recoil_Script: {fileID: 154704852}
+--- !u!1 &111109092
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 111109093}
+  - component: {fileID: 111109094}
+  m_Layer: 0
+  m_Name: NavMesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &111109093
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111109092}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1118354515}
+  m_RootOrder: 0
+>>>>>>> f5bac48535272fa3498a1791980c580b3917c8ca
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &125804896
 GameObject:
@@ -867,8 +934,13 @@ MonoBehaviour:
   range: 100
   fireRate: 15
   impactForce: 30
+<<<<<<< HEAD
   maxAmmo: 40
   reloadTime: 1
+=======
+  maxAmmo: 30
+  reloadTime: 3
+>>>>>>> f5bac48535272fa3498a1791980c580b3917c8ca
   fpscamera: {fileID: 1962132669}
   muzzleflash: {fileID: 2041955712}
   impactEffect: {fileID: 100002, guid: 3b1513bcb86426b4795879be6a128ed7, type: 3}
