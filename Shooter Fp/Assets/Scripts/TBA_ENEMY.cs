@@ -91,7 +91,6 @@ public class TBA_ENEMY : MonoBehaviour
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
-            Destroy(rb, 2f);
         }
     }
     private void ResetAttack()
@@ -99,7 +98,7 @@ public class TBA_ENEMY : MonoBehaviour
         alreadyAttacked = false;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
         health -= damage;
 

@@ -11,18 +11,20 @@ public class Scope : MonoBehaviour
     private bool IsScope = false;
     private void Update()
     {
-        if (Input.GetButtonDown("Fire2"))
+        if(Input.GetButtonDown("Fire2"))
         {
-                IsScope = !IsScope;
-                animator.SetBool("Scoped", IsScope);
-                if (IsScope)
-                {
-                    StartCoroutine(onScoped());
-                }
-                else
-                {
-                    OnUnscoped();
-                }
+            IsScope = !IsScope;
+            animator.SetBool("Scoped", IsScope);
+            if(IsScope)
+            {
+                StartCoroutine(onScoped());            
+            }
+            else
+            {
+                OnUnscoped();
+            }
+        
+
         }
     }
     void OnUnscoped()
