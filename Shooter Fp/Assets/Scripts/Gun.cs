@@ -14,7 +14,7 @@ public class Gun : MonoBehaviour
     private int currentAmmo;
     public float reloadTime = 1f;
     private bool isReloading = false;
-    public float allammo = 200;
+    float allammo = 200;
 
     public Camera fpscamera;
     public ParticleSystem muzzleflash;
