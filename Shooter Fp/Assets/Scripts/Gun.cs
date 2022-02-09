@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class Gun : MonoBehaviour 
 {
@@ -8,6 +9,11 @@ public class Gun : MonoBehaviour
     public float range = 100f;
     public float fireRate = 15f;
     public float impactForce = 30f;
+
+    public int maxAmmo = 10;
+    private int currentAmmo;
+    public float reloadTime = 1f;
+    private bool isReloading = false;
 
     public Camera fpscamera;
     public ParticleSystem muzzleflash;
@@ -19,11 +25,20 @@ public class Gun : MonoBehaviour
 
     public void Start()
     {
+        
+        currentAmmo = maxAmmo;
     }
     // Update is called once per frame
     void Update()
     {
-        
+        if (isReloading)
+            return;
+
+        if(currentAmmo <= 0)
+        {
+            StartCoroutine(Reload());
+            return;
+        }
         if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
@@ -33,10 +48,23 @@ public class Gun : MonoBehaviour
 
     }
 
+    IEnumerator Reload ()
+    {
+        isReloading = true;
+        Debug.Log("Reloading...");
+
+        yield return new WaitForSeconds(reloadTime);
+
+        currentAmmo = maxAmmo;
+        isReloading = false; 
+    }
+
     public void Shoot()
     {
         Recoil_Script.RecoilFire();
         muzzleflash.Play();
+
+        currentAmmo--;
 
         RaycastHit hit;
         if (Physics.Raycast(fpscamera.transform.position, fpscamera.transform.forward, out hit, range))
