@@ -5510,7 +5510,6 @@ MonoBehaviour:
   impactForce: 30
   maxAmmo: 3
   reloadTime: 3
-  allammo: 200
   fpscamera: {fileID: 560240462}
   muzzleflash: {fileID: 1863726020}
   impactEffect: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
@@ -6402,7 +6401,6 @@ MonoBehaviour:
   impactForce: 30
   maxAmmo: 40
   reloadTime: 1
-  allammo: 200
   fpscamera: {fileID: 560240462}
   muzzleflash: {fileID: 18304083}
   impactEffect: {fileID: 100002, guid: 3b1513bcb86426b4795879be6a128ed7, type: 3}
@@ -9103,7 +9101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1679509365}
-  ScopeOverlay: {fileID: 0}
+  ScopeOverlay: {fileID: 1192762828}
   CameraWeapon: {fileID: 177958022}
 --- !u!95 &1679509365
 Animator:
