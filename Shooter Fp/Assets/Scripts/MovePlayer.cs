@@ -13,12 +13,14 @@ public class MovePlayer : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundmask;
+    bool isCrouching;
 
     Vector3 velocity;
     bool isGrounded;
     // Update is called once per frame
     void Update()
     {
+        Crouch();
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundmask);
 
         if (isGrounded && velocity.y < 0)
@@ -41,5 +43,25 @@ public class MovePlayer : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+    }
+    void Crouch()
+    {
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            speed = 2;
+            controller.height = .5f;
+            isCrouching = true;
+        }
+        else
+        {
+            speed = 4;
+            controller.height = 2;
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                isCrouching = true;
+                return;
+            }
+            isCrouching = false;
+        }
     }
 }
