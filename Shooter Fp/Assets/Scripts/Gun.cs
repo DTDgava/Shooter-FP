@@ -14,7 +14,7 @@ public class Gun : MonoBehaviour
     private int currentAmmo;
     public float reloadTime = 1f;
     private bool isReloading = false;
-    float allammo = 200;
+    float allammo = 21;
 
     public Camera fpscamera;
     public ParticleSystem muzzleflash;
@@ -27,23 +27,42 @@ public class Gun : MonoBehaviour
 
     public void Start()
     {
-        
-        currentAmmo = maxAmmo;
-        ammoText.text = currentAmmo + " | " + allammo;
+
+        this.currentAmmo = this.maxAmmo;
+        this.ammoText.text = this.currentAmmo + " | " + this.allammo;
     }
     // Update is called once per frame
     void Update()
     {
-        if (isReloading)
-            return;
-
-        if(currentAmmo <= 0)
+        if(Input.GetAxis("Mouse ScrollWheel") > 1)
         {
-            allammo -= maxAmmo;
+            this.ammoText.text = this.currentAmmo + " | " + this.allammo;
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 1)
+        {
+            this.ammoText.text = this.currentAmmo + " | " + this.allammo;
+        }
+        
+        if (this.isReloading)
+            return;
+        if(currentAmmo <= 0 && Input.GetKeyDown(KeyCode.R))
+        {
+            this.ammoText.text = "R" + " | " + this.allammo;
+            if (allammo < maxAmmo)
+            {
+                this.currentAmmo = (int)this.allammo;
+                this.allammo = 0;
+            }
+            else
+            {
+                this.allammo -= this.maxAmmo;
+            }
             StartCoroutine(Reload());
             return;
+            
         }
-        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
+
+        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire && currentAmmo > 0)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();
@@ -54,12 +73,15 @@ public class Gun : MonoBehaviour
 
     IEnumerator Reload ()
     {
-        isReloading = true;
-        ammoText.text = "R" + " | " + allammo;
+        this.isReloading = true;
+        this.ammoText.text = "R" + " | " + this.allammo;
         yield return new WaitForSeconds(reloadTime);
-        currentAmmo = maxAmmo;
-        isReloading = false;
-        ammoText.text = currentAmmo + " | " + allammo;
+        if (this.allammo > this.maxAmmo)
+        {
+            currentAmmo = maxAmmo;
+        }
+        this.isReloading = false;
+        this.ammoText.text = this.currentAmmo + " | " + this.allammo;
     }
 
     public void Shoot()
@@ -67,7 +89,7 @@ public class Gun : MonoBehaviour
         Recoil_Script.RecoilFire();
         muzzleflash.Play();
 
-        currentAmmo--;
+        this.currentAmmo--;
 
         RaycastHit hit;
         if (Physics.Raycast(fpscamera.transform.position, fpscamera.transform.forward, out hit, range))
@@ -87,6 +109,6 @@ public class Gun : MonoBehaviour
             GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impactGO, 2f);
         }
-        ammoText.text = currentAmmo + " | " + allammo;
+        this.ammoText.text = this.currentAmmo + " | " + this.allammo;
     }
 }

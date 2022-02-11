@@ -74,6 +74,7 @@ public class TBA_ENEMY : MonoBehaviour
         agent.SetDestination(player.position);
     }
 
+    [System.Obsolete]
     private void AttackPlayer()
     {
         //Make sure enemy doesn't move
@@ -88,10 +89,9 @@ public class TBA_ENEMY : MonoBehaviour
             rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
             rb.AddForce(transform.up * 8f, ForceMode.Impulse);
             ///End of attack code
-
+            Destroy(rb.gameObject,2f);
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
-            Destroy(rb, 2f);
         }
     }
     private void ResetAttack()
